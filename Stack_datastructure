@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 5  // maximum stack size
+
+int stack[MAX];
+int top = -1;  // indicates empty stack
+
+void push(int x) {
+    if (top == MAX - 1) {
+        printf("Stack overflow! Cannot push %d\n", x);
+    } else {
+        stack[++top] = x;
+        printf("%d pushed onto stack\n", x);
+    }
+}
+
+void pop() {
+    if (top == -1) {
+        printf("Stack underflow! Nothing to pop.\n");
+    } else {
+        printf("%d popped from stack\n", stack[top--]);
+    }
+}
+
+void peek() {
+    if (top == -1) {
+        printf("Stack is empty.\n");
+    } else {
+        printf("Top element is %d\n", stack[top]);
+    }
+}
+
+void display() {
+    if (top == -1) {
+        printf("Stack is empty.\n");
+    } else {
+        printf("Stack elements (top to bottom): ");
+        for (int i = top; i >= 0; i--) {
+            printf("%d ", stack[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int choice, value;
+    do {
+        printf("\n--- Stack Operations — Size: %d ---\n", MAX);
+        printf("1) Push\n");
+        printf("2) Pop\n");
+        printf("3) Peek (Top)\n");
+        printf("4) Display stack\n");
+        printf("5) Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to push: ");
+                scanf("%d", &value);
+                push(value);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                peek();
+                break;
+            case 4:
+                display();
+                break;
+            case 5:
+                printf("Exiting program.\n");
+                break;
+            default:
+                printf("Invalid choice. Please choose 1–5.\n");
+        }
+    } while (choice != 5);
+
+    return 0;
+}
