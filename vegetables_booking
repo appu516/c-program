@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main() {
+    int choice, qty;
+    float price = 0.0, total;
+
+    printf("=== Vegetable Booking Menu ===\n");
+    printf("1) Tomato – ₹20 per kg\n");
+    printf("2) Potato – ₹15 per kg\n");
+    printf("3) Onion  – ₹25 per kg\n");
+    printf("Enter your choice (1–3): ");
+    scanf("%d", &choice);
+
+    
+    if (choice == 1) {
+        price = 20.0;
+        printf("You chose Tomato.\n");
+    } else if (choice == 2) {
+        price = 15.0;
+        printf("You chose Potato.\n");
+    } else if (choice == 3) {
+        price = 25.0;
+        printf("You chose Onion.\n");
+    } else {
+        printf("Invalid choice. Exiting...\n");
+        return 1;
+    }
+
+         
+    printf("Enter quantity in kg: ");
+    scanf("%d", &qty);
+    if (qty <= 0) {
+        printf("Quantity must be positive. Exiting...\n");
+        return 1;
+    }
+
+    
+    total = price * qty;
+    printf("Total cost: ₹%.2f (₹%.2f × %d kg)\n", total, price, qty);
+    printf("Thank you for booking!\n");
+
+    return 0;
+}
