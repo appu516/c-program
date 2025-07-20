@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 5  
+
+int main() {
+    int i, choice, booked = 0;
+    char names[MAX][50];
+    int ticket_no[MAX], seats[MAX];
+    double fare_per_seat[MAX], total_fare[MAX];
+
+    do {
+        printf("\n--- Train Booking Menu ---\n");
+        printf("1) Book Ticket\n");
+        printf("2) View All Bookings\n");
+        printf("3) Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                if (booked >= MAX) {
+                    printf("Sorry, max bookings reached (%d)\n", MAX);
+                    break;
+                }
+                i = booked;
+                printf("\nEnter ticket number: ");
+                scanf("%d", &ticket_no[i]);
+                getchar(); // consume newline
+                printf("Enter passenger name: ");
+                fgets(names[i], 50, stdin);
+                names[i][strcspn(names[i], "\n")] = 0;
+
+                printf("Enter seats to book: ");
+                scanf("%d", &seats[i]);
+                printf("Enter fare per seat: ₹");
+                scanf("%lf", &fare_per_seat[i]);
+
+                total_fare[i] = seats[i] * fare_per_seat[i];
+                printf("Booking done! Total fare = ₹%.2f\n", total_fare[i]);
+                booked++;
+                break;
+
+            case 2:
+                if (booked == 0) {
+                    printf("\nNo bookings made yet.\n");
+                    break;
+                }
+                printf("\n--- All Bookings ---\n");
+                for (i = 0; i < booked; i++) {
+                    printf("Ticket #%d:\n", ticket_no[i]);
+                    printf("  Name       : %s\n", names[i]);
+                    printf("  Seats      : %d\n", seats[i]);
+                    printf("  Fare/Seat  : ₹%.2f\n", fare_per_seat[i]);
+                    printf("  Total fare : ₹%.2f\n\n", total_fare[i]);
+                }
+                break;
+
+            case 3:
+                printf("Exiting program.\n");
+                break;
+
+            default:
+                printf("Invalid choice. Try again.\n");
+        }
+    } while (choice != 3);
+
+    return 0;
+}
